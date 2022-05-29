@@ -6,6 +6,10 @@
 
 - Use `assign` to replace `if-else` and `case`.
 
+- Label module name and direction on module port.
+
+- Active low reset.
+
 ## Use standard DFF module to initialize registers
 
 For registers, use instance of standardized library DFF modules instead of an `always` block. This will help when
@@ -74,3 +78,30 @@ assign out = ({4{sel1}} & in1[3:0])
            | ({4{sel2}} & in2[3:0])
            | ({4{sel3}} & in3[3:0]);
 ```
+
+## Label module name and direction on module port
+
+Label module name and direction on module port. `clk` and `rst` can be an exception.
+
+Example:
+
+```verilog
+module ifu (
+  input clk,
+  input rst,
+  input ifu_i_is_halt,
+  input ifu_i_is_jump,
+  input ifu_i_is_branch_taken,
+  input [31:0] ifu_i_pc_target,
+
+  output [31:0] ifu_o_pc,
+  output [31:0] ifu_o_inst,
+
+  output [31:0] ifu_o_iaddr,
+  input [31:0] ifu_i_idata
+);
+```
+
+## Active low reset
+
+Yes, use active low reset.
